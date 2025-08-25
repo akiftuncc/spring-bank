@@ -25,15 +25,38 @@ public class CustomUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<String> roles = user.getRoles();
 		return roles.stream()
-			.map(r -> r.startsWith("ROLE_") ? r : "ROLE_" + r)
-			.map(SimpleGrantedAuthority::new)
-			.collect(Collectors.toSet());
+				.map(r -> r.startsWith("ROLE_") ? r : "ROLE_" + r)
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toSet());
 	}
 
-	@Override public String getPassword() { return user.getPasswordHash(); }
-	@Override public String getUsername() { return user.getEmail(); }
-	@Override public boolean isAccountNonExpired() { return true; }
-	@Override public boolean isAccountNonLocked() { return true; }
-	@Override public boolean isCredentialsNonExpired() { return true; }
-	@Override public boolean isEnabled() { return true; }
+	@Override
+	public String getPassword() {
+		return user.getPasswordHash();
+	}
+
+	@Override
+	public String getUsername() {
+		return user.getEmail();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
